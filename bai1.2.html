@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List Design 2</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('gr2.gif') center center fixed; /* Đường dẫn đến tấm ảnh background cho trang thứ hai */
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            animation: backgroundAnimation 30s linear infinite;
+        }
+
+        @keyframes backgroundAnimation {
+            0% {
+                background-position: 0% 0%;
+            }
+            50% {
+                background-position: 100% 0%;
+            }
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+
+        a {
+            text-decoration: none !important; /* Loại bỏ gạch chân dưới cho tất cả các liên kết */
+        }
+
+        .todo-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 400px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #3498db;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        li.completed {
+            color: #2ecc71;
+        }
+
+        #addTask {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        #taskInput {
+            width: 70%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        #addButton {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <h2>Việc cần làm</h2>
+        <ul>
+            <li><input type="checkbox" onclick="toggleCompleted(this)"> Làm bài 1 lab3 <button class="delete-btn" onclick="deleteTask(this)">Xóa</button></li>
+            <li><input type="checkbox" onclick="toggleCompleted(this)"> Làm bài 2 lab3 <button class="delete-btn" onclick="deleteTask(this)">Xóa</button></li>
+            <li><input type="checkbox" onclick="toggleCompleted(this)"> Nộp bài <button class="delete-btn" onclick="deleteTask(this)">Xóa</button></li>
+        </ul>
+        <div id="addTask">
+            <input type="text" id="taskInput" placeholder="Thêm việc mới">
+            <button id="addButton" onclick="addTask()">Thêm</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleCompleted(checkbox) {
+            var li = checkbox.parentNode;
+            if (checkbox.checked) {
+                li.classList.add('completed');
+            } else {
+                li.classList.remove('completed');
+            }
+        }
+
+        function addTask() {
+            var taskInput = document.getElementById('taskInput').value;
+            if (taskInput.trim() !== '') {
+                var ul = document.querySelector('.todo-container ul');
+                var li = document.createElement('li');
+                li.innerHTML = '<input type="checkbox" onclick="toggleCompleted(this)"> ' + taskInput + ' <button class="delete-btn" onclick="deleteTask(this)">Xóa</button>';
+                ul.appendChild(li);
+                document.getElementById('taskInput').value = '';
+            }
+        }
+
+        function deleteTask(button) {
+            var li = button.parentNode;
+            li.remove();
+        }
+    </script>
+</body>
+</html>

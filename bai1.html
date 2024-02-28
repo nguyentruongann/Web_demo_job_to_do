@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công việc Cần Làm </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('photograp1.jpg'); /* Đường dẫn đến tấm ảnh background */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .todo-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .delete-btn {
+            background-color: #ff5252;
+            color: #fff;
+            border: none;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            display: none;
+        }
+
+        li:hover .delete-btn {
+            display: block;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #27ae60;
+        }
+
+        #addTask {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        #taskInput {
+            flex-grow: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+
+        #addButton {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <h2>Công việc Cần Làm</h2>
+        <ul>
+        </ul>
+        <div id="addTask">  
+            <input type="text" id="taskInput" placeholder="Thêm việc mới">
+            <button id="addButton" onclick="addTask()">Thêm</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleCompleted(checkbox) {
+            var li = checkbox.parentNode;
+            if (checkbox.checked) {
+                li.classList.add('completed');
+            } else {
+                li.classList.remove('completed');
+            }
+        }
+
+        function addTask() {
+            var taskInput = document.getElementById('taskInput').value;
+            if (taskInput.trim() !== '') {
+                var ul = document.querySelector('.todo-container ul');
+                var li = document.createElement('li');
+                li.innerHTML = '<input type="checkbox" onclick="toggleCompleted(this)"> ' + taskInput + ' <button class="delete-btn" onclick="deleteTask(this)">Xóa</button>';
+                ul.appendChild(li);
+                document.getElementById('taskInput').value = '';
+            }
+        }
+
+        function deleteTask(button) {
+            var li = button.parentNode;
+            li.remove();
+        }
+    </script>
+</body>
+</html>
